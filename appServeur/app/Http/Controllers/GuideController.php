@@ -65,7 +65,8 @@ protected $repository;
     public function show($slug)
     {
         $guide = Guide::where('slug', $slug)->first();
-        return view('admin/guide/show', ['guide' => $guide]);
+        $places = $guide->places;
+        return view('admin/guide/show', ['guide' => $guide, 'places' =>$places]);
     }
 
     /**

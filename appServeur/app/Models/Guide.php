@@ -26,7 +26,7 @@ class Guide extends Authenticatable
 
     public function places()
     {
-        return $this->hasMany(Place::class);
+        return $this->hasMany(\App\Models\Place::class);
     }
 
 

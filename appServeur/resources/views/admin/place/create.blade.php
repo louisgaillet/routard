@@ -45,7 +45,7 @@
         </div>
         <div class="form-group">
             <label>Arriver & quitter</label>
-            <textarea id="arriver-quitter" name="arriver-quitter" ></textarea>
+            <textarea id="arriver-quitter" name="arriver_quitter" ></textarea>
         </div>
         {{Form::submit('Sauvegarder')}}
         {!! Form::close() !!}
@@ -56,37 +56,5 @@
 <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCFVCdbFEQ3cjgE5oJDo_nO9msS91PuX1I">
 </script>
-<script>
-
-    google.maps.event.addDomListener(window, 'load', function() {
-        initializeAutocomplete('user_input_autocomplete_address');
-    });
-
-    function initializeAutocomplete(id) {
-        var element = document.getElementById(id);
-        if (element) {
-            var autocomplete = new google.maps.places.Autocomplete(element, { types: ['geocode'] });
-            google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
-        }
-    }
-
-    function onPlaceChanged() {
-        var place = this.getPlace();
-
-        console.log(place);  // Uncomment this line to view the full object returned by Google API.
-        var lat = document.getElementById('latitude');
-        var lng = document.getElementById('longitude');
-        lat.value = place.geometry.location.lat();
-        lng.value = place.geometry.location.lng();
-
-        for (var i in place.address_components) {
-            var component = place.address_components[i];
-            for (var j in component.types) {  // Some types are ["country", "political"]
-                var type_element = document.getElementById(component.types[j]);
-                if (type_element) {
-                    type_element.value = component.long_name;
-                }
-            }
-        }
-    }
-</script>
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=916hzdlc3tzo9px21wtzq932vkcmxw01b5o1homnk5ybru38"></script>
+<script src="{{ asset('js/place.js') }}"></script>
