@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image as InterventionImage;
 
 class CategoryController extends Controller
 {
@@ -25,7 +27,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin/categories/create');
+        $categories = Category::all();
+        return view('admin/categories/create',['categories' => $categories]);
     }
 
     /**
@@ -42,7 +45,16 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->name = $request->name;
+        if($request->file('picture')){
+            $path = Storage::disk('images')->put('', $request->file('picture'));
+            $image = InterventionImage::make($request->file('picture'))->widen(30);
+            Storage::disk('images')->put($path, $image->encode());
+            $category->picture = $path;
+        }
+
         $category->slug = str_slug($request->name);
+        if($request->parent_id != 'null')
+            $category->parent_id = $request->parent_id;
         $category->save();
 
         return back()->with('ok', __("La catégorie a bien été enregistrée"));
@@ -82,7 +94,18 @@ class CategoryController extends Controller
     public function update(Request $request, $slug)
     {
         $category = Category::where('slug', $slug)->first();
-        $category->update($request->all());
+
+        $category->name = $request->name;
+        if($request->file('picture')){
+            $path = Storage::disk('images')->put('', $request->file('picture'));
+            $image = InterventionImage::make($request->file('picture'))->widen(30);
+            Storage::disk('images')->put($path, $image->encode());
+            $category->picture = $path;
+        }
+        $category->slug = str_slug($request->name);
+        if($request->parent_id != 'null')
+            $category->parent_id = $request->parent_id;
+        $category->save();
         return redirect()->route('categories.index')->with('ok', 'la catégorie à été edité');
     }
 

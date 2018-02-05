@@ -19,9 +19,9 @@ class CreateServicesTable extends Migration
             $table->foreign('place_id')->references('id')->on('places')->onDelete('cascade');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->integer('typeServices_id')->unsigned();
-            $table->foreign('typeServices_id')->references('id')->on('typeServices')->onDelete('cascade');
+            $table->integer('category_secondary_id')->nullable();
             $table->string('name');
+            $table->integer('level_price')->nullable();
             $table->string('slug')->unique();
 
             $table->longText('introduction');
@@ -31,8 +31,8 @@ class CreateServicesTable extends Migration
             $table->string('locality');
             $table->string('country');
             $table->string('phone')->nullable();
-            $table->float('lat');
-            $table->float('lng');
+            $table->decimal('lat', 20, 10);
+            $table->decimal('lng', 20, 10);
 
 
 

@@ -23,8 +23,8 @@ class CreateModelsPlacesTable extends Migration
             $table->string('street_number')->nullable();
             $table->string('locality');
             $table->string('country');
-            $table->float('lat');
-            $table->float('lng');
+            $table->decimal('lat', 20, 10);
+            $table->decimal('lng', 20, 10);
             $table->longText('introduction');
             $table->longText('histoire')->nullable();
             $table->longText('arriver_quitter')->nullable();
@@ -40,6 +40,6 @@ class CreateModelsPlacesTable extends Migration
     public function down()
     {
 
-        Schema::dropIfExists('models_places');
+        Schema::dropIfExists('places');
     }
 }

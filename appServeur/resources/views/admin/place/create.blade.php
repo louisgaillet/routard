@@ -14,6 +14,7 @@
                     <option value="{{$guide->id}}">{{$guide->name}}</option>
                 @endforeach
             </select>
+        </div>
         <div class="form-group">
             <label>Nom</label>
             <input type="text" name="name">

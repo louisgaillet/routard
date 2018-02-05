@@ -22,5 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('guides', 'GuideController');
 Route::resource('categories', 'CategoryController');
-
 Route::resource('place', 'PlaceController');
+Route::resource('place/{place}/services', 'ServiceController');

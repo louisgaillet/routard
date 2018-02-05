@@ -10,7 +10,9 @@
 
         <h2> Destination du guide </h2>
         @foreach ($places as $place)
-            {{$place->name}}
+            <a href="{{route('place.show', ['slug' => $place->slug])}}" class="col-md-6 col-xs-12">
+                {{$place->name}}
+            </a>
         @endforeach
     </div>
 @endsection

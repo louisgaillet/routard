@@ -8,5 +8,14 @@
         {{Form::submit('Supprimer')}}
         {!! Form::close() !!}
 
+        <a href="{{route('services.create',[$place->slug])}}">Ajouter une donnée </a>
+
+        <h2> Présent dans la guide </h2>
+        @foreach ($services as $service)
+            <a href="{{route('services.show', ['place' => $place->slug, 'slug'=>$service->slug])}}" class="col-md-6 col-xs-12">
+                {{$service->name}}
+            </a>
+        @endforeach
+
     </div>
 @endsection

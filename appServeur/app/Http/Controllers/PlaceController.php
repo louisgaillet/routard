@@ -67,7 +67,8 @@ class PlaceController extends Controller
     public function show($slug)
     {
         $place = Place::where('slug', $slug)->first();
-        return view('admin/place/show', ['place' => $place]);
+        $services = $place->services;
+        return view('admin/place/show', ['place' => $place, 'services' => $services]);
     }
 
     /**
@@ -130,6 +131,6 @@ class PlaceController extends Controller
     {
         $place = Place::where('slug', $slug)->first();
         $place->delete();
-        return redirect()->route('place.index')->with('ok', 'Supprimé');
+        return redirect()->route('place.index')->with('ok', ' supprimé');
     }
 }

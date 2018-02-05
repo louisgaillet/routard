@@ -23,5 +23,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@user.fr',
             'password' => bcrypt('user'),
         ]);
+        $this->call(CategoriesTableSeeder::class);
+        $this->call(GuidesTableSeeder::class);
+        $this->call(PlacesTableSeeder::class);
+        $this->call(ServicesTableSeeder::class);
     }
 }

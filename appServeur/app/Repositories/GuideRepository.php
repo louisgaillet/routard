@@ -18,11 +18,10 @@ class GuideRepository
         // Save thumb
 
         // Storage
-        $date = new \DateTime(null);
-        $slug = $request->name.$date->format('dmYis');
+
         $guide = new Guide();
         $guide->name =$request->name;
-        $guide->slug = str_slug($slug);
+        $guide->slug = str_slug($request->name);
         $guide->picture = $path;
         $guide->save();
     }

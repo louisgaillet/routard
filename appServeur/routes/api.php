@@ -16,3 +16,16 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::namespace('Api')->group(function() {
+});
+
+Route::namespace('Api')->group(function() {
+    Route::resource('guide', 'GuideController', ['except' => ['create', 'edit', 'store', 'update', 'destroy']]);
+    Route::resource('place', 'PlaceController', ['except' => ['create', 'edit', 'store', 'update', 'destroy']]);
+    Route::resource('categories', 'CategoryController', ['except' => ['create', 'edit', 'store', 'update', 'destroy']]);
+    Route::resource('service', 'ServiceController', ['except' => ['create', 'edit', 'store', 'update', 'destroy']]);
+    Route::get('/services', 'ServiceController@showWithCoords');
+});
+
+
